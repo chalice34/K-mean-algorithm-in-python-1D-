@@ -1,0 +1,85 @@
+from random import*
+def c2(x):
+    x=randrange(min(x),int(mean(x)))
+    return x
+def mean(x):
+    l=x
+    return sum(l)/len(l)
+x=[]
+xe=int(input("enter no of elements: "))
+for i in range(xe):
+    es=int(input())
+    x.insert(i,es)
+
+def distance(x):
+    D1=[]
+    D2=[]
+    NC=[]
+    NC1=[]
+    NC2=[]
+    X=0
+    Y=0
+    for i in range(len(x)):
+        D1.append(abs(x[i]-int(mean(x))))
+        D2.append(abs(x[i]-int(c2(x))))
+    print("first ittration")
+    print("D1: ",D1)
+    print("D2: ",D2)
+    for i in range(len(x)):
+        NC.append(1) if(D1[i]<D2[i]) else NC.append(2)
+    print("Nearest closure: ",NC)
+    for i in range(len(x)):
+        if(NC[i]==1):
+            NC1.append(x[i])
+        else:
+            NC2.append(x[i])
+    print("parted NC1: ",NC1)
+    print("parted NC2",NC2)
+    
+    X=int(mean(NC1))
+    Y=int(mean(NC2))
+    print("New centroid:",X," ",Y)
+    return X,Y
+def distance2(x1,y1,x,s=2):
+    D1=[]
+    D2=[]
+    NC=[]
+    NC1=[]
+    NC2=[]
+    X=0
+    Y=0
+    for i in range(len(x)):
+        D1.append(abs(x[i]-x1))
+        D2.append(abs(x[i]-y1))
+    print("{} ittration".format(s))
+    print("D1: ",D1)
+    print("D2: ",D2)
+    for i in range(len(x)):
+        NC.append(1) if(D1[i]<D2[i]) else NC.append(2)
+    print("Nearest closure: ",NC)
+    for i in range(len(x)):
+        if(NC[i]==1):
+            NC1.append(x[i])
+        else:
+            NC2.append(x[i])
+    print("parted NC1: ",NC1)
+    print("parted NC2",NC2)
+    
+    X=int(mean(NC1))
+    Y=int(mean(NC2))
+    print("New centroid:",X," ",Y)
+    return X,Y
+
+print("c1=",mean(x))
+print("c2=",c2(x))
+x1,y1=distance(x)
+#x=[15,16,22,28,30]
+
+x2,y2=distance2(x1, y1, x)
+min=int(input("enter no of ittrations: "))
+for s in range(min):
+    if(x1!=x2 and y1!=y2):
+        x2,y2=distance2(x1, y1, x,s)
+    elif(x1==x2 and y1==y2):
+        print("cluster ends at second ittration")
+        break               
